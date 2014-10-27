@@ -14,31 +14,31 @@
  * Creation date: 27th October 2014
  * License: GNU GPL v2
  */
+
 'use strict'
 
-function ExtObj () {
-    console.log('creating top object with this = ' + this.constructor);
-    this.prototype  = {};
-}
+var ExtObj = new (function () {
+    this.prototype = {};
+    this.extend = function () {
+        var that = this;
 
-ExtObj.prototype.extend = function () {
-    console.log('extending object with this = ' + this.constructor);
-    var that = this;
-    function derive () {
-        function newClass () {
-            console.log('creating new class instance with this = ' + this.constructor);
-            if (newClass.prototype.hasOwnProperty('initialize')
-                    && typeof this.initialize == 'function') {
-                console.log('running ctor: ' + this.initialize);
-                this.initialize(arguments);
+        return new (function () {
+            function newClass () {
+                if (newClass.prototype.hasOwnProperty('initialize')
+                        && typeof this.initialize == 'function') {
+                    this.initialize(arguments);
+                }
             }
-        };
-        newClass.extend           = ExtObj.prototype.extend;
-        newClass.prototype        = Object.create(that.prototype);
-        newClass.prototype._super = that.prototype;
-        return newClass;
-    }; 
-    //derive.prototype = Object.create(ExtObj.prototype);
-    return new derive();
-}
 
+            newClass.extend    = that.extend;
+            newClass.prototype = Object.create(that.prototype);
+
+            /*
+             * Define the "super" handle to access parent.
+             * TODO: use defineProperty() to make it nonenumerable.
+             */
+            newClass.prototype._super = that.prototype;
+            return newClass;
+        })();
+    }
+})();

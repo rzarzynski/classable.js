@@ -19,7 +19,8 @@ ExtObj.prototype.extend = function () {
     function derive () {
         function newClass () {
             console.log('creating new class instance with this = ' + this.constructor);
-            if (typeof this.initialize == 'function') {
+            if (newClass.prototype.hasOwnProperty('initialize')
+                    && typeof this.initialize == 'function') {
                 console.log('running ctor: ' + this.initialize);
                 this.initialize(arguments);
             }

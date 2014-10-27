@@ -2,6 +2,14 @@
  * Extremely simple classical iheritance implementation
  * for JavaScript. Initial version.
  *
+ * Goals:
+ *  1) Compatibility with method definition via the "prototype"
+ *     property of Function object.
+ *  2) Class instantiation using the "new" operator.
+ *  3) Split the "extend" operation from instance creation.
+ *  4) Support for calling super-methods as well as super-ctors.
+ *  5) Low overhead.
+ *
  * Author: Radoslaw Zarzynski
  * Creation date: 27th October 2014
  * License: GNU GPL v2

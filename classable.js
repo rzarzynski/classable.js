@@ -28,7 +28,7 @@
         module.exports = factory();
     } else {
         /* Browser globals (root is window). */
-        root.ExtObj = factory();
+        root.CObject = factory();
     }
 }(this, function () {
     return new (function () {

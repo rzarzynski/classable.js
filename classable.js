@@ -40,7 +40,7 @@
                 function newClass () {
                     if (newClass.prototype.hasOwnProperty('initialize')
                             && typeof this.initialize === 'function') {
-                        this.initialize(arguments);
+                        this.initialize.apply(this, arguments);
                     }
                 }
                 newClass.extend    = that.extend;

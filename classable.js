@@ -48,7 +48,7 @@
 
                 /* Define the "super" handle to access parent.
                  * TODO: use defineProperty() to make it nonenumerable. */
-                newClass.prototype._super = that.prototype;
+                newClass._super    = that.prototype;
                 return newClass;
             })();
         }

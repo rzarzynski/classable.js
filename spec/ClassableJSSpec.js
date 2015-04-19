@@ -30,10 +30,20 @@ describe("classable.js microframework", function () {
     xit("should not have its explicitly hidden constructors called", function () {
     });
 
+    it("should have been set as 'this' during execution of its constructor");
+
+    it("should have access to its creation arguments in constructor");
+
     it("should have all atributes from its inheritance path", function () {
       expect(this.c.attrC).toEqual(this.C.prototype.attrC);
       expect(this.c.attrB).toEqual(this.B.prototype.attrB);
       expect(this.c.attrA).toEqual(this.A.prototype.attrA);
+    });
+
+    it("can access overloaded members via _super of its class", function () {
+      this.C.prototype.attrB = 100;
+      expect(this.c.attrB).toEqual(100);
+      expect(this.C._super.attrB).toEqual(this.B.prototype.attrB);
     });
 
     it("should reflect changes to prototype dict of its base class", function () {
@@ -43,10 +53,5 @@ describe("classable.js microframework", function () {
       expect(this.c.attrB).toEqual(0);
     });
 
-    it("can access overloaded members via _super of its class", function () {
-      this.C.prototype.attrB = 100;
-      expect(this.c.attrB).toEqual(100);
-      expect(this.C._super.attrB).toEqual(this.B.prototype.attrB);
-    });
   });
 });

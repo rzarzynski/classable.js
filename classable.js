@@ -30,7 +30,7 @@
         /* Browser globals (root is window). */
         root.CObject = factory();
     }
-}(this, function () {
+})(this, function () {
     return new (function () {
         this.prototype = {};
         this.extend = function () {
@@ -53,4 +53,4 @@
             })();
         }
     })();
-}));
+});
